@@ -17,6 +17,15 @@ jobs:
       - name: Install build dependencies
         run: apk add --no-cache bash python3 make
 
+      - name: Diagnose PS2 toolchain
+        shell: sh
+        run: |
+          echo "PS2DEV=$PS2DEV"
+          echo "PS2SDK=$PS2SDK"
+          ls -la /usr/local/ps2dev/ee/bin || true
+          command -v ee-g++ || true
+          command -v mips64r5900el-ps2-elf-g++ || true
+
       - name: Build PGEN
         shell: bash
         run: |
