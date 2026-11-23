@@ -14,6 +14,9 @@ jobs:
         with:
           ref: sd-ceara-experimental
 
+      - name: Install build dependencies
+        run: apk add --no-cache bash python3 make
+
       - name: Build PGEN
         shell: bash
         run: |
