@@ -1,0 +1,29 @@
+
+name: PGEN SD CEARA - build experimental
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ps2dev/ps2dev:latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sd-ceara-experimental
+
+      - name: Build PGEN
+        shell: bash
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Upload ELF
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: PGEN-SD-CEARA-resultado
+          path: dist/*.ELF
+          if-no-files-found: warn
